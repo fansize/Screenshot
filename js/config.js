@@ -4,8 +4,11 @@
 
 var App = window.App || {};
 
+// Apple screenshot specifications (checked 2026-11-11):
+// https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications
+// Use a required Dynamic Island medium display for iPhone and 13-inch display for iPad.
 App.FORMATS = {
-    'iphone': { width: 1242, height: 2688, name: 'iPhone 6.5"', cornerRadius: 0.10 },
+    'iphone': { width: 1206, height: 2622, name: 'iPhone Dynamic Island (medium)', cornerRadius: 0.10 },
     'ipad': { width: 2064, height: 2752, name: 'iPad 13"', cornerRadius: 0.04 },
     'mac': { width: 2880, height: 1800, name: 'Mac', cornerRadius: 0.02 },
     'android-phone': { width: 1080, height: 1920, name: 'Phone', cornerRadius: 0.06 },

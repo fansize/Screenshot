@@ -15,7 +15,7 @@ Create beautiful, localized screenshots for your app store listings. No account,
 
 ## Features
 
-- **All store formats** — iPhone, iPad, Mac, Android Phone & Tablet in every required size
+- **Store formats** — iPhone, iPad, Mac, Android Phone & Tablet
 - **Layout presets** — Top, Center, Bottom positioning with adjustable spacing
 - **Customizable design** — Fonts, colors, gradients, device frames, shadows
 - **Multi-language** — Add languages and export localized screenshots in one click
@@ -29,9 +29,14 @@ Create beautiful, localized screenshots for your app store listings. No account,
 
 | App Store | Google Play |
 |-----------|-------------|
-| iPhone 6.9", 6.7", 6.5", 6.3", 6.1", 5.5" | Phone FHD (1080p), QHD (1440p) |
-| iPad 13", 12.9", 11" | Tablet 7", 10" |
-| Mac 2880, 1280 | |
+| iPhone Dynamic Island (medium), 1206 × 2622 | Phone, 1080 × 1920 |
+| iPad 13", 2064 × 2752 | Tablet, 1200 × 1920 |
+| Mac, 2880 × 1800 | |
+
+Exports use one fixed size per platform. The iPhone and iPad sizes match Apple's
+required display categories in the [official screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications)
+(checked November 11, 2026). App Store Connect can scale these screenshots for
+smaller displays. PNG exports use RGB without an alpha channel.
 
 ## Usage
 
@@ -40,8 +45,7 @@ Create beautiful, localized screenshots for your app store listings. No account,
 3. Pick a layout preset (Top, Center, Bottom)
 4. Customize title, subtitle, colors and fonts
 5. Add languages and translate (manually or with AI)
-6. Select which device sizes to export
-7. Click **Export** to download a ZIP with all formats
+6. Click **Export** to download a ZIP with screenshots for all populated platforms
 
 ## AI Translation
 

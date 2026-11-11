@@ -172,3 +172,23 @@
     display: block;
 }
 
+.import-json-btn {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--input);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    color: var(--foreground);
+    font: inherit;
+    cursor: pointer;
+}
+
+.import-json-btn:hover { background: var(--muted); }
+.import-json-btn:focus-visible { box-shadow: var(--ring-shadow); }
+
+#importJsonStatus {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--foreground-muted);
+}
+

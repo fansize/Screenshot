@@ -88,7 +88,71 @@ App.updateUndoRedoButtons = function() {
     if (undoBtn) undoBtn.style.display = App.Undo.canUndo() ? '' : 'none';
 };
 
+// Validate before making any changes; extra entries are deliberately ignored.
+App.importContentJson = function(entries) {
+    var screenshots = App.getActiveScreenshots();
+    if (!screenshots.length) throw new Error('Add screenshots before importing JSON.');
+    if (!Array.isArray(entries) || !entries.length) {
+        throw new Error('Expected a non-empty JSON array of {"title":"…","body":"…"} objects.');
+    }
+    var count = Math.min(entries.length, screenshots.length);
+    for (var i = 0; i < count; i++) {
+        if (!entries[i] || typeof entries[i].title !== 'string' || typeof entries[i].body !== 'string') {
+            throw new Error('Entry ' + (i + 1) + ' must contain title and body strings.');
+        }
+    }
+    if (App.Undo._captureTimeout) {
+        clearTimeout(App.Undo._captureTimeout);
+        App.Undo._captureTimeout = null;
+    }
+    App.Undo.capture();
+    for (var j = 0; j < count; j++) {
+        var settings = screenshots[j].settings;
+        settings.headline = entries[j].title;
+        settings.subheadline = entries[j].body;
+        if (!settings.content) settings.content = {};
+        App.saveContentToActiveLanguage(settings);
+    }
+    App.updateSettingsUI();
+    App.renderAllPreviews();
+    App.Storage.scheduleSave();
+    App.Undo.capture();
+    return count;
+};
+
 App.initEventListeners = function() {
+    var importInput = document.getElementById('importJsonInput');
+    var importStatus = document.getElementById('importJsonStatus');
+    document.getElementById('importJsonBtn').addEventListener('click', function() {
+        importInput.click();
+    });
+    importInput.addEventListener('change', async function() {
+        var file = importInput.files[0];
+        if (!file) return;
+        var project = App.activeProjectId;
+        var platform = App.getActivePlatformData();
+        var language = App.state.activeLanguage;
+        try {
+            var text = await file.text();
+            if (project !== App.activeProjectId || platform !== App.getActivePlatformData() || language !== App.state.activeLanguage) {
+                throw new Error('The project, platform or language changed. Please import again.');
+            }
+            var entries;
+            try {
+                entries = JSON.parse(text.replace(/^\uFEFF/, ''));
+            } catch (error) {
+                throw new Error('Invalid JSON. Choose a JSON array of title and body objects.');
+            }
+            var count = App.importContentJson(entries);
+            importStatus.textContent = 'Updated ' + count + ' screenshot' + (count === 1 ? '.' : 's.') +
+                (entries.length > count ? ' Extra entries ignored.' : '');
+        } catch (error) {
+            importStatus.textContent = error.message || 'Could not read the JSON file.';
+        } finally {
+            importInput.value = '';
+            importStatus.hidden = false;
+        }
+    });
     // Settings tabs
     document.querySelectorAll('.settings-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {

@@ -78,3 +78,21 @@ This is a personal project. The code is open-source for transparency and learnin
 ## License
 
 [MIT](LICENSE)
+
+## Cloudflare Workers deployment
+
+The deployment at https://screenshot.oodicraft.com uses the `screenshot-studio` Worker.
+Its custom domain is declared in `cloudflare.config.ts`.
+
+```bash
+npm ci
+npm run deploy:check
+npm run deploy
+```
+
+Authenticate the cf CLI with an account that can deploy Workers and manage the
+`oodicraft.com` zone. If the environment needs proxy support, prefix the deploy
+commands with `NODE_USE_ENV_PROXY=1`.
+
+The build copies only website files into `dist/`; repository files and deployment
+dependencies are not published. `wrangler.config.ts` selects that asset directory.

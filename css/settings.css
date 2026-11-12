@@ -249,3 +249,18 @@
 .section-collapsible.expanded {
     display: block;
 }
+
+#contentTab {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding-bottom: 0;
+}
+
+#contentTab.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-import {
+    margin-top: auto;
+}

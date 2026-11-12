@@ -129,6 +129,7 @@ App.initEventListeners = function() {
     importInput.addEventListener('change', async function() {
         var file = importInput.files[0];
         if (!file) return;
+        importStatus.hidden = true;
         var project = App.activeProjectId;
         var platform = App.getActivePlatformData();
         var language = App.state.activeLanguage;
@@ -143,14 +144,12 @@ App.initEventListeners = function() {
             } catch (error) {
                 throw new Error('Invalid JSON. Choose a JSON array of title and body objects.');
             }
-            var count = App.importContentJson(entries);
-            importStatus.textContent = 'Updated ' + count + ' screenshot' + (count === 1 ? '.' : 's.') +
-                (entries.length > count ? ' Extra entries ignored.' : '');
+            App.importContentJson(entries);
         } catch (error) {
             importStatus.textContent = error.message || 'Could not read the JSON file.';
+            importStatus.hidden = false;
         } finally {
             importInput.value = '';
-            importStatus.hidden = false;
         }
     });
     // Settings tabs

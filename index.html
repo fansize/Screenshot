@@ -172,11 +172,6 @@
             <div class="settings-scroll">
                 <!-- Content Tab -->
                 <div class="settings-tab-content active" id="contentTab">
-                    <section class="settings-section">
-                        <button type="button" class="import-json-btn" id="importJsonBtn">Import JSON</button>
-                        <input type="file" id="importJsonInput" accept=".json,application/json" hidden>
-                        <p id="importJsonStatus" role="status" aria-live="polite" hidden></p>
-                    </section>
                     <!-- Layout -->
                     <section class="settings-section" id="textLayoutSection">
                         <div class="section-header">
@@ -299,6 +294,11 @@
                                 </div>
                             </div>
                         </div>
+                    </section>
+                    <section class="settings-footer content-import">
+                        <button type="button" class="import-json-btn" id="importJsonBtn">Import JSON</button>
+                        <input type="file" id="importJsonInput" accept=".json,application/json" hidden>
+                        <p id="importJsonStatus" role="status" aria-live="polite" hidden></p>
                     </section>
                 </div>
 

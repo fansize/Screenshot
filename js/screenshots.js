@@ -107,12 +107,6 @@ App.selectScreenshot = function(index) {
         items[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
-    // Switch to Content tab when selecting a screenshot
-    var contentTab = document.querySelector('.settings-tab[data-tab="content"]');
-    if (contentTab && !contentTab.classList.contains('active')) {
-        contentTab.click();
-    }
-
     App.updateSettingsUI();
 };
 
@@ -225,15 +219,6 @@ App.updateTextFieldsState = function() {
     document.getElementById('bodySection').style.display = hideText ? 'none' : 'block';
     document.getElementById('textGapRow').style.display = hideText ? 'none' : 'flex';
     document.getElementById('alignRow').style.display = hideText ? 'none' : 'flex';
-
-    // Disable the Content tab when there is no text (center preset)
-    var contentTab = document.querySelector('.settings-tab[data-tab="content"]');
-    if (contentTab) {
-        contentTab.classList.toggle('disabled', hideText);
-        if (hideText && contentTab.classList.contains('active')) {
-            document.querySelector('.settings-tab[data-tab="style"]').click();
-        }
-    }
 };
 
 

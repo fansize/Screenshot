@@ -85,7 +85,8 @@ This is a personal project. The code is open-source for transparency and learnin
 
 ## Cloudflare Workers deployment
 
-The deployment at https://screenshot.oodicraft.com uses the `screenshot-studio` Worker.
+The deployment at https://screenshot.oodicraft.com uses the `screenshot` Worker. The Worker name in `cloudflare.config.ts` must match
+the existing Worker connected to Workers Builds.
 Its custom domain is declared in `cloudflare.config.ts`.
 
 ```bash
